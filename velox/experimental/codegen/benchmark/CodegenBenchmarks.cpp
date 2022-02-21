@@ -37,14 +37,22 @@ int main(int argc, char** argv) {
   auto inputRowType2 =
       ROW({"a", "b"}, std::vector<TypePtr>{DOUBLE(), DOUBLE()});
   benchmark.benchmarkExpressions<DoubleType, DoubleType, DoubleType>(
-      "SimpleAddSubMul", {" a + b", "a - b", "a * b"}, inputRowType2, 100, 1000);
+      "SimpleAddSubMul",
+      {" a + b", "a - b", "a * b"},
+      inputRowType2,
+      100,
+      1000);
 
-    BENCHMARK_DRAW_LINE();
+  BENCHMARK_DRAW_LINE();
 
   auto inputRowType3 =
-          ROW({"a", "b"}, std::vector<TypePtr>{DOUBLE(), DOUBLE()});
+      ROW({"a", "b"}, std::vector<TypePtr>{DOUBLE(), DOUBLE()});
   benchmark.benchmarkExpressions<DoubleType, DoubleType>(
-          "SimpleIfStmt", {"if(a > b , a + b, a - b)", "if( a < b , a - b, a + b)"}, inputRowType3, 100, 1000);
+      "SimpleIfStmt",
+      {"if(a > b , a + b, a - b)", "if( a < b , a - b, a + b)"},
+      inputRowType3,
+      100,
+      1000);
 
   folly::runBenchmarks();
   benchmark.compareResults();
