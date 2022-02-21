@@ -254,11 +254,11 @@ void registerVeloxStringFunctions(UDFManager& udfManager) {
   // Those will dynamically scan the encoding and do the fast path if needed
   udfManager.registerUDF(
       getStringUDFBase().withVeloxFunctionNames({"upper"}).withCalledFunctionName(
-          "functions::stringImpl::upper<functions::stringCore::StringEncodingMode::MOSTLY_ASCII>"));
+          "functions::stringImpl::upper<true>"));
 
   udfManager.registerUDF(
       getStringUDFBase().withVeloxFunctionNames({"lower"}).withCalledFunctionName(
-          "functions::stringImpl::lower<functions::stringCore::StringEncodingMode::MOSTLY_ASCII>"));
+          "functions::stringImpl::lower<true>"));
 
   // This concat does not do the optimization at which the children are
   // written directly in the output.
@@ -274,7 +274,7 @@ void registerVeloxStringFunctions(UDFManager& udfManager) {
           .withArgumentsLookupTypes({TypeKind::VARCHAR})
           .withVeloxFunctionNames({"length"})
           .withCalledFunctionName(
-              "functions::stringImpl::length<functions::stringCore::StringEncodingMode::MOSTLY_ASCII>"));
+              "functions::stringImpl::length<true>"));
 }
 
 void UDFManager::registerUDF(const UDFInformation& udfInformation) {
