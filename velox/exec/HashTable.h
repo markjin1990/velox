@@ -532,8 +532,8 @@ class HashTable : public BaseHashTable {
       char* FOLLY_NULLABLE* FOLLY_NULLABLE groups,
       uint64_t* FOLLY_NULLABLE hashes,
       int32_t numGroups,
-      int32_t partitionBegin = 0,
-      int32_t partitionEnd = std::numeric_limits<int32_t>::max(),
+      int64_t partitionBegin = 0,
+      int64_t partitionEnd = std::numeric_limits<int64_t>::max(),
       std::vector<char*>* FOLLY_NULLABLE overflows = nullptr);
 
   // Inserts 'numGroups' entries into 'this'. 'groups' point to
@@ -621,8 +621,8 @@ class HashTable : public BaseHashTable {
       uint64_t hash,
       char* FOLLY_NULLABLE row,
       bool extraCheck,
-      int32_t partitionBegin,
-      int32_t partitionEnd,
+      int64_t partitionBegin,
+      int64_t partitionEnd,
       std::vector<char*>* FOLLY_NULLABLE overflows);
 
   // Updates 'hashers_' to correspond to the keys in the
@@ -671,7 +671,7 @@ class HashTable : public BaseHashTable {
   // Bounds of independently buildable index ranges in the table. The
   // range of partition i starts at [i] and ends at [i +1]. Bounds are multiple
   // of cache line  size.
-  raw_vector<int32_t> buildPartitionBounds_;
+  raw_vector<int64_t> buildPartitionBounds_;
 
   // Executor for parallelizing hash join build. This may be the
   // executor for Drivers. If this executor is indefinitely taken by
